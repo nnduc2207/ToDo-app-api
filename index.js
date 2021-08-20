@@ -1,11 +1,18 @@
 const express = require('express')
+const mongoose = require('mongoose');
+
+const keys = require('./config/keys')
+
+// Connect database
+mongoose.connect(keys.mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true
+});
 
 const app = new express()
 
-app.get('/', (req,res) => {
-    res.send('Hello')
-})
-
-app.listen(5000, () => {
-    console.log('Server is on port 5000');
+app.listen(keys.PORT, () => {
+    console.log('Server is on port ' + keys.PORT);
 })
